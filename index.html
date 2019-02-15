@@ -8,13 +8,14 @@
     <!--If you need to use Icons go to this website for more icons-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
-    <!--Angular JS-->
+    <!--Angular JS version 1.6.9-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
     <script src="//unpkg.com/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
    <!--UI-Bootstrap-->
     <script src="js/ui-bootstrap-2.5.0.js"></script>
-    <!---->
+    <!--Firebase-->
+        <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
     <!--JS File-->
     <script src="js/scripts.js"></script>
      <!--Bootstrap stuff-->
@@ -28,7 +29,7 @@
 
 
 </head>
-<body ng-app="myApp">
+<body ng-app="myApp" ng-controller="initCtrl">
         <!--Navigation Bar-->
         <nav class="icon-bar">
                 <a ui-sref="index"  ui-sref-active="active"><i class="fa fa-home"></i></a>  <!--active just changes which one is highlighted for which tab is active-->

@@ -1,7 +1,8 @@
 main{
+  display: block;
     position: relative;
-    margin-left: 7%; /*Moves main from under the nav bar*/
-}
+    margin-left: 80px; /*Moves main from under the nav bar*/
+  }
 .icon-bar {
     width: 90px; /* Set a specific width */
     background-color: #555; /* Dark-grey background */
@@ -25,3 +26,17 @@ main{
   .active {
     background-color: #FFA500; /* Add an active/current color */
   }
+
+.login{
+  border:none;
+  padding:0px;
+  height:45px;
+  width: 191px;
+  background-image:url("google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png");
+  background-repeat: no-repeat;
+  outline:none;
+}
+.login:hover{
+  background:url("google_signin_buttons/web/1x/btn_google_signin_light_focus_web.png");
+  background-repeat: no-repeat;
+}

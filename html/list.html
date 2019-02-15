@@ -1,3 +1,4 @@
-<body>
-    <h1>User's list</h1>
-</body>
+<div ng-controller="listCtrl" ng-switch="user|| '_undefined_'">
+   <h1 ng-switch-default>{{user.displayName}}'s List</h1>
+    <h1 ng-switch-when="_undefined_">User's List</h1>
+</div>

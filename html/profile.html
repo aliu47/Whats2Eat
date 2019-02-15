@@ -1,4 +1,12 @@
-<body>
+<div ng-controller="loginCtrl" ng-switch="user|| '_undefined_'">
         <h1>Profile</h1>
-    
-</body>
+        <div ng-switch-when="_undefined_">
+                <button class="login" ng-click="login()"></button>
+        </div>
+         <div ng-switch-default>
+                <h1>Welcome</h1>
+                <p>{{user.displayName}}</p>        
+           
+                <button ng-click="logout()">sign out</button>
+        </div>
+</div>
