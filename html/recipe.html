@@ -1,0 +1,30 @@
+<div ng-controller='recipeCtrl'>
+    <a ui-sref="home" style="font-size:22px">
+        <div ng-repeat="recipe in recipesList| filter:{id: id}|orderBy:id|limitTo: 1">
+            <div>
+                <h1>{{recipe.id}} </h1>
+            </div>
+            <div>
+                <h2>ingredients:</h2>
+                <p>{{recipe.ingredients}}</p>
+                <!--     <div ng-repeat="ing in recipe.ingredients">
+                <p>{{ing}}</p>
+            </div>-->
+            </div>
+            <div>
+                <h2>Cuisine:</h2>
+                <p>{{recipe.cuisine}}</p>
+            </div>
+            <div>
+                <div>
+                    <i class="fa fa-check"></i>complete recipe
+                </div>
+                <i class="fa fa-star"></i> Favorite recipe
+            </div>
+            <div>
+                &nbsp
+                <h2>Comments:</h2>
+
+            </div>
+        </div>
+</div>

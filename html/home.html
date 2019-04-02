@@ -1,3 +1,11 @@
 <div ng-controller='homeCtrl'>
-<h1> What's to Eat?</h1>
+    <h1> Whats2Eat?</h1>
+    <div ng-repeat="x in recipesList">
+        <a ui-sref="recipe({id:{{x.id}}})">
+            {{x.id}}
+        </a>
+    </div>
+</div>
+
+</div>
 </div>

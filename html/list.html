@@ -1,4 +1,20 @@
-<div ng-controller="listCtrl" ng-switch="user|| '_undefined_'">
-   <h1 ng-switch-default>{{user.displayName}}'s List</h1>
-    <h1 ng-switch-when="_undefined_">User's List</h1>
+<div ng-controller="listCtrl">
+    <!-- ng-switch="user|| '_undefined_'"-->
+    <!-- <div ng-switch-default>
+    <h1 >{{user.displayName}}'s List</h1>
+    <input type="text" ng-model="ingredient.name" >
+    <button ng-click="add()">Add</button>
+   </div> 
+   <div ng-switch-when="_undefined_">-->
+    <h1>User's List</h1>
+    Add ingredient:<input type="text" ng-model="ingredient.name">
+    <button ng-click="add()">Add</button>
+    <button ng-click="removeAll()">Clear All</button>
+
+    <div ng-repeat="x in userList">
+        <div>
+            {{x.name}} <i class="fas fa-times" ng-click="remove(x)"></i>
+        </div>
+    </div>
+</div>
 </div>
