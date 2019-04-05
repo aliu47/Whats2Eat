@@ -9,12 +9,20 @@
     <h1>User's List</h1>
     Add ingredient:<input type="text" ng-model="ingredient.name">
     <button ng-click="add()">Add</button>
-    <button ng-click="removeAll()">Clear All</button>
+    <button ng-click="search()">Search recipes</button>
 
     <div ng-repeat="x in userList">
         <div>
             {{x.name}} <i class="fas fa-times" ng-click="remove(x)"></i>
         </div>
     </div>
-</div>
+    <div>
+        <h1>Recipes you can make!</h1>
+        <div>
+            <ul ng-repeat="x in match">
+                    <a ui-sref="recipe({id:{{x}}})">         
+                        {{x}}
+            </div>
+        </div>
+    </div>
 </div>

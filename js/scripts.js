@@ -119,27 +119,60 @@ app.controller('recipeCtrl', function ($scope, $state, myService, $firebaseArray
   $scope.user = myService.checkUser();
   $scope.recipesList = recipeService.getRecipes();
   console.log($scope.recipesList);
+  console.log($scope.id);
+    $scope.commentList = $firebaseArray(firebase.database().ref("/comments/"+$scope.id));
 
-  $scope.favorited = function () {
+
+  $scope.favorited = function (recipe) {
     console.log("Add to favorites");
+    if ($scope.user != null) {
+      list = firebase.database().ref("/favorites/" + $scope.user.uid);
+    } else {
+      list = firebase.database().ref("/favorites/0");
+    }
+    $scope.userList = $firebaseArray(list);
+    console.log($scope.userList.$add(recipe.id));     
   };
 
-  $scope.completed = function () {
+  $scope.completed = function (recipe) {
     console.log("Add to completed");
+    if ($scope.user != null) {
+      list = firebase.database().ref("/completed/" + $scope.user.uid);
+    } else {
+      list = firebase.database().ref("/completed/0");
+    }
+    $scope.userList = $firebaseArray(list);
+    console.log($scope.userList.$add(recipe.id));   
+  }
+
+  $scope.addComment=function(){
+   // $scope.comment.user = $scope.user.displayName;
+    console.log($scope.commentList.$add($scope.comment));
+    //$scope.comment.desc = null;
   }
 });
 
 //List Controller
-app.controller('listCtrl', function ($scope, $state, myService, $firebaseArray) {
+app.controller('listCtrl', function ($scope, $state, myService, $firebaseArray,recipeService) {
   $scope.user = myService.checkUser();
   var list;
   if ($scope.user != null) {
     list = firebase.database().ref("/list/" + $scope.user.uid);
+    // matchList = firebase.database().ref("/match/" + $scope.user.uid);
+
   } else {
     list = firebase.database().ref("/list/0");
+    // matchList = firebase.database().ref("/match/0");
   }
+  // $scope.matchList=$firebaseArray(matchList);
+  // console.log($scope.matchList.id[0]);
+  // console.log($scope.matchList[0].length);
+  // if($scope.matchList[0].length>0){
+  //   $scope.match=$scope.matchList[0];
+  //}
   $scope.userList = $firebaseArray(list);
   $scope.add = function () {
+    $scope.ingredient.name=$scope.ingredient.name.toLowerCase();
     console.log($scope.userList.$add($scope.ingredient));
     $scope.ingredient.name = null;
   }
@@ -147,8 +180,29 @@ app.controller('listCtrl', function ($scope, $state, myService, $firebaseArray) 
     var remove = ingredient;
     $scope.userList.$remove(remove);
   }
-  $scope.removeAll = function () {
-    $scope.userList.$remove();
+  $scope.search = function () {
+    $scope.match = [];
+    var match = [];
+    $scope.recipesList = recipeService.getRecipes();
+    for (let x = 0; x < $scope.userList.length; x++) {
+      for (let index = 0; index < $scope.recipesList.length; index++) {
+        recipe = $scope.recipesList[index].ingredients;
+        //console.log(recipe + " "+$scope.userList[x].name)
+        //console.log(recipe.includes($scope.userList[x]));
+        if(recipe.includes($scope.userList[x].name)){
+        //  match.push({id:$scope.recipesList[index].id});
+        match.push($scope.recipesList[index].id);  
+      }
+      }
+    }
+    $scope.match =new Set(match);
+    $scope.match = Array.from($scope.match);
+    $scope.match = $scope.match.sort(function(a, b) {
+      return a - b;
+    });
+    console.log($scope.match);
+    //$scope.matchList.$add(match);
+    
   }
 });
 //Recomendation Controller
