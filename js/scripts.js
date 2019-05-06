@@ -122,7 +122,25 @@ app.controller('recipeCtrl', function ($scope, $state, myService, $firebaseArray
   console.log($scope.id);
   comments = firebase.database().ref("/comments/"+$scope.id);
   $scope.commentList = $firebaseArray(comments);
+  $scope.sortOption = [1,2,3,4,5];
+  $scope.choice = $scope.sortOption[0];
+  $scope.ratingList = firebase.database().ref("recipes/"+$scope.id+"/ratingList");
+  $scope.ratList=$firebaseArray($scope.ratingList);
 
+  $scope.rate = function(){
+    total = 0
+    console.log($scope.ratList.$add($scope.choice));
+    // console.log($scope.ratList[0].value);
+    console.log($scope.ratList.length);
+    for(let x = 0; x < $scope.ratList.length; x++){
+              
+        total=total+$scope.ratList[x].$value;  
+    }
+    total = total/$scope.ratList.length;
+    total = total.toFixed(2)
+    recipe = firebase.database().ref("recipes/"+$scope.id+"/rating").set(total);
+    
+  }
 
   $scope.favorited = function (recipe) {
     console.log("Add to favorites");
