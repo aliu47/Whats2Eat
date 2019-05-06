@@ -41,16 +41,16 @@
 <body ng-app="myApp" ng-controller="initCtrl">
     <!--Navigation Bar-->
     <nav class="icon-bar">
-        <a ui-sref="index" ui-sref-active="active"><i class="fa fa-home"></i></a>
+        <a class="home"ui-sref="index" ui-sref-active="active"><i class="fa fa-home"></i></a>
         <!--active just changes which one is highlighted for which tab is active-->
-        <a ui-sref="profile" ui-sref-active="active"><i class="fa fa-user"></i></a>
-        <a ui-sref="list" ui-sref-active="active"><i class="fas fa-list-ul"></i></a>
+        <a class ="profile" ui-sref="profile" ui-sref-active="active"><i class="fa fa-user"></i></a>
+        <a class="list" ui-sref="list" ui-sref-active="active"><i class="fas fa-list-ul"></i></a>
         <!--   <a ui-sref="catelog"  ui-sref-active="active"><i class="fas fa-utensils"></i></a> -->
-        <a ui-sref="recommend" ui-sref-active="active"><i class="fas fa-utensils"></i>
+        <a class = "rec"ui-sref="recommend" ui-sref-active="active"><i class="fas fa-utensils"></i></a>
             <!--<i class="fa fa-globe"></i></a>-->
-            <a ui-sref="favorites" ui-sref-active="active"><i class="fa fa-star"></i></a>
+            <!-- <a ui-sref="favorites" ui-sref-active="active"><i class="fa fa-star"></i></a> -->
     </nav>
-    <main class="col-md-8">
+    <main class="col-md-10">
         <!--Load the UI here-->
         <ui-view></ui-view>
     </main>

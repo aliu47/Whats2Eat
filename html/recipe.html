@@ -2,7 +2,7 @@
     <a ui-sref="home" style="font-size:22px">
         <div ng-repeat="recipe in recipesList| filter:{id: id}|orderBy:id|limitTo: 1">
             <div>
-                <h1>{{recipe.id}} </h1>
+                <h1 class="title">{{recipe.id}} </h1>
             </div>
             <div>
                 <h2>ingredients:</h2>
@@ -17,18 +17,19 @@
             </div>
             <div>
                 <div>
-                    <i class="fa fa-check" ng-click="completed(recipe)"></i>completed recipe
+                    <i class="fa fa-check" style="color: #00ff00" ng-click="completed(recipe)"></i>completed recipe
                 </div>
-                <i class="fa fa-star" ng-click="favorited(recipe)"></i> Favorite recipe
+                <i class="fa fa-star" style="color:#FFD700	" ng-click="favorited(recipe)"></i> Favorite recipe
+            </div>
             </div>
             <div>
                 &nbsp
                 <h2>Comments:</h2>
                 <input type="text" ng-model="comment.desc">
                 <button ng-click="addComment()">Add Comment</button>
-                <div ng-repeat="comment in commentList">
-                    {{comment.user}}
-                    {{comment.comment}}
+                <div ng-repeat="comment in commentList|orderBy:'id':true"">
+                    &nbsp
+                    <p>{{comment.user}} : {{comment.desc}}</p> 
                 </div>
 
             </div>

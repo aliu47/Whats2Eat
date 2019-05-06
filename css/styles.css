@@ -1,13 +1,36 @@
+@font-face {
+  font-family: "myFirstFont";
+  src: url("../assets/fonts/Brusher.otf") ;
+  src: url("../assets/fonts/Brusher.ttf") ;
+}
+
+first{
+  margin-left:0px;
+  padding-left:0px;
+}
 main{
+  min-height: 1000px;
+  border: 2px solid black;
+  border-left:none;
+  border-bottom:none;
   display: block;
     position: relative;
-    margin-left: 80px; /*Moves main from under the nav bar*/
+    margin-left: 100px; /*Moves main from under the nav bar*/
+  /* padding-top: 100px; */
   }
+.title{
+  font-family: "myFirstFont";
+  color:#FFB800;
+  font-size: 500%;
+}
+
 .icon-bar {
-    width: 90px; /* Set a specific width */
-    background-color: #555; /* Dark-grey background */
+    width: 100px; /* Set a specific width */
+    background-color: #ffffff; /* Dark-grey background */
     height: 100vh;
     position: fixed;
+    border: 2px solid black;
+    border-bottom: none;
 }
   
   .icon-bar a{
@@ -15,16 +38,29 @@ main{
     text-align: center; /* Center-align text */
     padding: 16px; /* Add some padding */
     transition: all 0.3s ease; /* Add transition for hover effects */
-    color: white; /* White text color */
+    color: black; /* White text color */
     font-size: 36px; /* Increased font-size */
+  }
+  .home{
+    background-color: #FF5714;
+  }
+
+  .profile{
+    background-color: #1BE7FF;
+  }
+  .list{
+    background-color: #6EEB83;
+  }
+  .rec{
+    background-color: #E4FF1A;
   }
   
   .icon-bar a:hover {
-    background-color: #000; /* Add a hover color */
+    background-color: #FF5714; /* Add a hover color */
   }
   
   .active {
-    background-color: #FFA500; /* Add an active/current color */
+    background-color: #FFB800; /* Add an active/current color */
   }
 
 .login{
@@ -39,4 +75,9 @@ main{
 .login:hover{
   background:url("google_signin_buttons/web/1x/btn_google_signin_light_focus_web.png");
   background-repeat: no-repeat;
+}
+
+.recipe{
+  font-size: 150%;
+  text-align: center;
 }

@@ -25,18 +25,17 @@ app.factory('myService', function () {
     },
   };
 });
-app.factory('recipeService', function($firebaseArray){
+app.factory('recipeService', function ($firebaseArray) {
   var recipes;
   return {
     getRecipes: getRecipes,
- 
+
     initRecipeList: function () {
-      recipes = $firebaseArray(firebase.database().ref("/recipes").limitToFirst(40));
+      recipes = $firebaseArray(firebase.database().ref("/recipes").limitToFirst(1300));
       return recipes;
-    },   
-    
+    },
   };
-  function getRecipes(){
+  function getRecipes() {
     return recipes;
   }
 })
@@ -102,25 +101,27 @@ app.config(function ($stateProvider) {
 });
 
 //Index Controller
-app.controller('initCtrl', function ($scope, myService, $state, $firebaseArray, $window,recipeService) {
+app.controller('initCtrl', function ($scope, myService, $state, $firebaseArray, $window, recipeService) {
   myService.initFirebase();
   $scope.user = myService.checkUser();
   $scope.recipesList = recipeService.initRecipeList();
-  console.log($scope.recipesList);
+ //  console.log($scope.recipesList);
 
 });
 //Home Controller
-app.controller('homeCtrl', function ($scope, $state, myService) {
-  $scope.user = myService.checkUser();
-  $scope.recipesList;
-});
-//Recipe Controller
-app.controller('recipeCtrl', function ($scope, $state, myService, $firebaseArray,recipeService) {
+app.controller('homeCtrl', function ($scope, $state, myService,recipeService) {
   $scope.user = myService.checkUser();
   $scope.recipesList = recipeService.getRecipes();
-  console.log($scope.recipesList);
+  console.log($scope.recipesList.length);
+
+  });
+//Recipe Controller
+app.controller('recipeCtrl', function ($scope, $state, myService, $firebaseArray, recipeService) {
+  $scope.user = myService.checkUser();
+  $scope.recipesList = recipeService.getRecipes();
   console.log($scope.id);
-    $scope.commentList = $firebaseArray(firebase.database().ref("/comments/"+$scope.id));
+  comments = firebase.database().ref("/comments/"+$scope.id);
+  $scope.commentList = $firebaseArray(comments);
 
 
   $scope.favorited = function (recipe) {
@@ -131,7 +132,7 @@ app.controller('recipeCtrl', function ($scope, $state, myService, $firebaseArray
       list = firebase.database().ref("/favorites/0");
     }
     $scope.userList = $firebaseArray(list);
-    console.log($scope.userList.$add(recipe.id));     
+    console.log($scope.userList.$add(recipe.id));
   };
 
   $scope.completed = function (recipe) {
@@ -142,18 +143,22 @@ app.controller('recipeCtrl', function ($scope, $state, myService, $firebaseArray
       list = firebase.database().ref("/completed/0");
     }
     $scope.userList = $firebaseArray(list);
-    console.log($scope.userList.$add(recipe.id));   
+    console.log($scope.userList.$add(recipe.id));
   }
 
-  $scope.addComment=function(){
-   // $scope.comment.user = $scope.user.displayName;
+  $scope.addComment = function () {
+    if($scope.user !=null){
+    $scope.comment.user = $scope.user.displayName;
+  }else{
+    $scope.comment.user = "anonymous"
+  }
     console.log($scope.commentList.$add($scope.comment));
-    //$scope.comment.desc = null;
+    $scope.comment.desc = null;
   }
 });
 
 //List Controller
-app.controller('listCtrl', function ($scope, $state, myService, $firebaseArray,recipeService) {
+app.controller('listCtrl', function ($scope, $state, myService, $firebaseArray, recipeService) {
   $scope.user = myService.checkUser();
   var list;
   if ($scope.user != null) {
@@ -172,7 +177,7 @@ app.controller('listCtrl', function ($scope, $state, myService, $firebaseArray,r
   //}
   $scope.userList = $firebaseArray(list);
   $scope.add = function () {
-    $scope.ingredient.name=$scope.ingredient.name.toLowerCase();
+    $scope.ingredient.name = $scope.ingredient.name.toLowerCase();
     console.log($scope.userList.$add($scope.ingredient));
     $scope.ingredient.name = null;
   }
@@ -189,24 +194,24 @@ app.controller('listCtrl', function ($scope, $state, myService, $firebaseArray,r
         recipe = $scope.recipesList[index].ingredients;
         //console.log(recipe + " "+$scope.userList[x].name)
         //console.log(recipe.includes($scope.userList[x]));
-        if(recipe.includes($scope.userList[x].name)){
-        //  match.push({id:$scope.recipesList[index].id});
-        match.push($scope.recipesList[index].id);  
-      }
+        if (recipe.includes($scope.userList[x].name)) {
+          //  match.push({id:$scope.recipesList[index].id});
+          match.push($scope.recipesList[index].id);
+        }
       }
     }
-    $scope.match =new Set(match);
+    $scope.match = new Set(match);
     $scope.match = Array.from($scope.match);
-    $scope.match = $scope.match.sort(function(a, b) {
+    $scope.match = $scope.match.sort(function (a, b) {
       return a - b;
     });
     console.log($scope.match);
     //$scope.matchList.$add(match);
-    
+
   }
 });
 //Recomendation Controller
-app.controller('recommendCtrl', function ($scope, $state, myService, $firebaseArray,recipeService) {
+app.controller('recommendCtrl', function ($scope, $state, myService, $firebaseArray, recipeService) {
   $scope.user = myService.checkUser();
   $scope.recipesList = recipeService.getRecipes();
   var list = firebase.database().ref("/list/0");
@@ -214,8 +219,15 @@ app.controller('recommendCtrl', function ($scope, $state, myService, $firebaseAr
 });
 
 //Login Controller
-app.controller('loginCtrl', function ($scope, $state, myService) {
+app.controller('loginCtrl', function ($scope, $state, myService,$firebaseArray) {
   $scope.user = myService.checkUser();
+  if ($scope.user != null) {
+    list = firebase.database().ref("/favorites/" + $scope.user.uid);
+    $scope.favorites = $firebaseArray(list);
+    list2 = firebase.database().ref("/completed/" + $scope.user.uid);
+    $scope.completed = $firebaseArray(list2);
+
+  }
   //Firebase Login
   $scope.login = function ($scope) {
     var provider = new firebase.auth.GoogleAuthProvider();

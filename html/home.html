@@ -1,10 +1,66 @@
 <div ng-controller='homeCtrl'>
-    <h1> Whats2Eat?</h1>
-    <div ng-repeat="x in recipesList">
-        <a ui-sref="recipe({id:{{x.id}}})">
-            {{x.id}}
-        </a>
+    <h1 class="title"> Whats2Eat?</h1>
+    <div>
+        <div class="row">
+            <div class="col-sm first">
+                <h2> mexican</h2>
+                <div ng-repeat="x in recipesList|filter:{cuisine:'mexican'}">
+                    <a class="recipe" ui-sref="recipe({id:{{x.id}}})">
+                        {{x.id}}
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm">
+                <h2>italian</h2>
+                <div ng-repeat="x in recipesList|filter:{cuisine:'italian'}">
+                    <a class="recipe" ui-sref="recipe({id:{{x.id}}})">
+                        {{x.id}}
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm">
+                <h2> chinese</h2>
+                <div ng-repeat="x in recipesList|filter:{cuisine:'chinese'}">
+                    <a class="recipe" ui-sref="recipe({id:{{x.id}}})">
+                        {{x.id}}
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm">
+                <h2> indian</h2>
+                <div ng-repeat="x in recipesList|filter:{cuisine:'indian'}">
+                    <a class="recipe" ui-sref="recipe({id:{{x.id}}})">
+                        {{x.id}}
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm">
+                <h2> greek</h2>
+                <div ng-repeat="x in recipesList|filter:{cuisine:'greek'}">
+                    <a class="recipe" ui-sref="recipe({id:{{x.id}}})">
+                        {{x.id}}
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm">
+                <h2> thai</h2>
+                <div ng-repeat="x in recipesList|filter:{cuisine:'thai'}">
+                    <a class="recipe" ui-sref="recipe({id:{{x.id}}})">
+                        {{x.id}}
+                    </a>
+                </div>
+            </div>
+            <!-- <div class="col-sm">
+                <h2> modern</h2>
+                <div ng-repeat="x in recipesList|filter:{cuisine:'modern'}">
+                    <a class="recipe" ui-sref="recipe({id:{{x.id}}})">
+                        {{x.id}}
+                    </a>
+                </div>
+            </div>
+        </div> -->
     </div>
+
 </div>
 
 </div>

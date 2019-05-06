@@ -1,12 +1,28 @@
 <div ng-controller="loginCtrl" ng-switch="user|| '_undefined_'">
-        <h1>Profile</h1>
+        <h1 class="title">Profile</h1>
         <div ng-switch-when="_undefined_">
                 <button class="login" ng-click="login()"></button>
         </div>
         <div ng-switch-default>
-                <h1>Welcome</h1>
-                <p>{{user.displayName}}</p>
-
+                <h1>{{user.displayName}}</h1>
                 <button ng-click="logout()">sign out</button>
+                       <div class="row">
+                        <div class="col-sm first">
+                                <h1>Favorites</h1>
+                                <div ng-repeat="x in favorites">
+                                        <a ui-sref="recipe({id:{{x.$value}}})">
+                                                {{x.$value}}
+                                        </a>
+                                </div>
+                        </div>
+                        <div class="col-sm">
+                                <h1>Completed</h1>
+                                <div ng-repeat="x in completed">
+                                        <a ui-sref="recipe({id:{{x.$value}}})">
+                                                {{x.$value}}
+                                        </a>
+                                </div>
+                        </div>
+                </div>
+
         </div>
-</div>

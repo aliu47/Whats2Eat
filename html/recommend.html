@@ -1,3 +1,23 @@
 <div ng-controller="recommendCtrl">
-    <h1>Recommendations</h1>
+    <h1 class="title">Recommendations</h1>
+    <div>
+        <div class="row">
+            <div class="col-sm first">
+                <h2> Most Viewed</h2>
+                <div ng-repeat="x in recipesList|filter:{cuisine:'mexican'}">
+                    <a class="recipe" ui-sref="recipe({id:{{x.id}}})">
+                        {{x.id}}
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm">
+                <h2>Highest Rated</h2>
+                <div ng-repeat="x in recipesList|filter:{cuisine:'italian'}">
+                    <a class="recipe" ui-sref="recipe({id:{{x.id}}})">
+                        {{x.id}}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
