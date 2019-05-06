@@ -32,7 +32,7 @@
             <h2>Comments:</h2>
             <input type="text" ng-model="comment.desc">
             <button ng-click="addComment()">Add Comment</button>
-            <div ng-repeat="comment in commentList|orderBy:'id':true" ">
+            <div ng-repeat="comment in commentList|orderBy:'id':true">
                     &nbsp
                     <p>{{comment.user}} : {{comment.desc}}</p> 
                 </div>

@@ -12,7 +12,7 @@
             </div>
             <div class="col-sm">
                 <h2>Highest Rated</h2>
-                <div ng-repeat="x in recipesList|filter:{cuisine:'italian'}">
+                <div ng-repeat="x in recipesList|orderBy:'rating'">
                     <a class="recipe" ui-sref="recipe({id:{{x.id}}})">
                         {{x.id}}
                     </a>

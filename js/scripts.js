@@ -137,7 +137,7 @@ app.controller('recipeCtrl', function ($scope, $state, myService, $firebaseArray
         total=total+$scope.ratList[x].$value;  
     }
     total = total/$scope.ratList.length;
-    total = total.toFixed(2)
+    total = total.toFixed(2);
     recipe = firebase.database().ref("recipes/"+$scope.id+"/rating").set(total);
     
   }
